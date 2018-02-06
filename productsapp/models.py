@@ -23,8 +23,8 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
 class Product(models.Model):
-    product_type = models.ForeignKey(ProductType, on_delete=models.PROTECT) 
-    category = models.ForeignKey(Category, on_delete=models.PROTECT) 
+    product_type = models.ForeignKey(ProductType, on_delete=models.PROTECT, verbose_name='Тип продукта') 
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name = 'Категория') 
     name = models.CharField(max_length=30, verbose_name='Продукт')
     description = models.TextField(verbose_name='Описание')
 
