@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+</head>
+<body>
+    <h1>Hello Python</h1>
+
+    {% for product in products%}
+        <div>
+            <h2>{{product.name}}</h2>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% endif %}
+            <div>{{product.category}}</div>
+            <div>{{product.product_type}}</div>
+            <div>{{product.description}}</div>
+        </div>
+    {% endfor %}
+</body>
+</html>
