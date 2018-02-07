@@ -1,14 +1,14 @@
 {% extends 'productsapp/base.html' %}
 
-{% block title %}Products List{% endblock %}
+{% block meta_title %}Products{% endblock meta_title %}
 
-{% block heading %}Продукты{% endblock %}
+{% block heading %}Продукты{% endblock heading %}
 
-{% block button%} 
-    <a href="{% url 'productsapp:add-product' %}" class="btn btn-primary btn-sm" role="button">Добавить продукт</a>
-{%endblock%}
+{% block button %} 
+    <a href="{% url 'productsapp:add-product' %}" class="btn btn-danger btn-sm" role="button">Добавить</a>
+{% endblock button %}
 
-{% block page %}
+{% block content %}
 
 <div class="row">
   <div class="col-lg-3">
@@ -23,26 +23,44 @@
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 
-    {% for product in products%}
+<br>
 
-    <div class="row">
-            <div class="col-md-4">
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"></div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Фото</th>
+            <th>Наименование</th> 
+            <th>Категория </th>
+            <th>Тип продукта </th>
+            <th>Описание </th>
+            <th>Редактирование </th>
+        </tr>
+
+
+        {% for product in products%}
+
+        <tr>
+            <td>
                 {% if product.image %}
-                    <img class="img-responsive"  src="{{ product.image.url }} " alt="" width="250" height="250">
+                    <img class="img-thumbnail"  src="{{ product.image.url }} " alt="" width="150" height="150">
                 {% else %}
-                    <img class="img-responsive"  src="/static/productsapp/img/default_image.jpg" alt="" width="250" height="250">
+                    <img class="img-thumbnail"  src="/static/productsapp/img/default_image.jpg" alt="" width="150" height="150">
                 {% endif %}
+            </td>
+            <td>{{ product.name }}</td> 
+            <td>{{product.category}}</td>
+            <td>{{product.product_type}}</td>
+            <td>{{product.description}}</td>
+            <td><a class="btn btn-default" href="{% url 'productsapp:edit-product' product.id %}">Редактировать</a></td>
+        </tr>
 
 
-            </div>
-            <div class="col-md-8">
-                <h3>{{ product.name }}</h3>
-                <h4>Категория : {{product.category}}</h4>
-                <h5>Тип продукта : {{product.product_type}}</h4>
-                <p>{{product.description}}</p>
-                <a class="btn btn-primary" href="{% url 'productsapp:edit-product' product.id %}">Edit<span class="glyphicon glyphicon-chevron-right"></span></a>
-            </div>
-        </div>
-        </div>
-    {% endfor %}
-{% endblock %}
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock content %}

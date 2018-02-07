@@ -1,10 +1,14 @@
 {% extends 'productsapp/base.html' %}
 
-{% block title %}Category{% endblock %}
+{% block meta_title  %}Category{% endblock meta_title %}
 
-{% block heading %}Категории{% endblock %}
+{% block heading %}Категории{% endblock heading%}
 
-{% block page %}
+{% block button %} 
+  <a href="{% url 'productsapp:add-category' %}" class="btn btn-danger btn-sm" role="button">Добавить</a>
+{% endblock button %}
+
+{% block content %}
 
 <table class="table table-bordered">
   <tr>
@@ -24,4 +28,4 @@
 
 </table>
 
-{% endblock %}
+{% endblock content %}

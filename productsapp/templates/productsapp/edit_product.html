@@ -1,16 +1,16 @@
 {% extends 'productsapp/base.html' %}
 {% load bootstrap3 %}
 
-{% block title %}Edit Product{% endblock %}
+{% block meta_title %}Edit Product{% endblock  %}
 
-{% block heading %}Редактирование продукта{% endblock %}
+{% block heading %}Редактирование продукта{% endblock heading %}
 
-{% block page %}
+{% block content %}
 
     <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button type="submit" class="btn btn-red pull-right">Применить</button>
+    <button type="submit" class="btn btn-danger pull-right">Применить</button>
 
-{% endblock %}
+{% endblock content %}
 

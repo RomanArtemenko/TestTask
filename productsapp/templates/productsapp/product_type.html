@@ -1,10 +1,14 @@
 {% extends 'productsapp/base.html' %}
 
-{% block title %}Category{% endblock %}
+{% block meta_title %}Category{% endblock meta_title%}
 
-{% block heading %}Типы продуктов{% endblock %}
+{% block heading %}Типы продуктов{% endblock heading %}
 
-{% block page %}
+{% block button %} 
+  <a href="{% url 'productsapp:add-product-type' %}" class="btn btn-danger btn-sm" role="button">Добавить</a>
+{% endblock button %}
+
+{% block content  %}
 
 <table class="table table-bordered">
   <tr>
@@ -14,14 +18,13 @@
 
     {% for type in types %}
 
-  <tr>
-    <td>{{type.id}}</td>
-    <td>{{type.name}}</td>
-  </tr>
-
+      <tr>
+        <td>{{type.id}}</td>
+        <td>{{type.name}}</td>
+      </tr>
 
     {% endfor %}
 
 </table>
 
-{% endblock %}
+{% endblock content %}
