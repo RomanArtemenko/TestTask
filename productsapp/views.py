@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from productsapp.models import Product, Category, ProductType
 
 from productsapp.forms import ProductForm, CategoryForm, ProductTypeForm 
@@ -24,7 +24,8 @@ def add_product(request):
     return render(request, 'productsapp/add_product.html', {'form': form})
 
 def edit_product(request, product_id):
-    form = ProductForm(instance = Product.objects.get(id = product_id))
+    #form = ProductForm(instance = Product.objects.get(id = product_id))
+    form = ProductForm(instance = get_object_or_404(Product, pk=product_id))
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance = Product.objects.get(id = product_id))
         if form.is_valid():
