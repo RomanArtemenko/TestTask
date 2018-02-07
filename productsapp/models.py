@@ -27,7 +27,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name = 'Категория') 
     name = models.CharField(max_length=30, verbose_name='Продукт')
     description = models.TextField(verbose_name='Описание')
-    image = models.ImageField('Фото', upload_to='productsapp/photos', default='', blank=True)
+    image = models.ImageField('Фото', upload_to='productsapp_images/', blank=False)
 
     def __str__(self):
         return self.name   

@@ -1,0 +1,25 @@
+{% extends 'productsapp/base.html' %}
+
+{% block title %}Products List{% endblock %}
+
+
+
+{% block page %}
+    <h1>Hello Python</h1>
+    <a href="{% url 'productsapp:add-product' %}" class="btn btn-red">Add Product</a>
+
+    {% for product in products%}
+        <div>
+            <h2>
+                <a href="{% url 'productsapp:edit-product' product.id %}">{{ product.name }}</a>
+
+            </h2>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% endif %}
+            <div>{{product.category}}</div>
+            <div>{{product.product_type}}</div>
+            <div>{{product.description}}</div>
+        </div>
+    {% endfor %}
+{% endblock %}
