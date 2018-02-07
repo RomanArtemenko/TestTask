@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from productsapp.models import Product
+from productsapp.models import Product, Category, ProductType
 
-from productsapp.forms import ProductForm 
+from productsapp.forms import ProductForm, CategoryForm, ProductTypeForm 
 
 # Create your views here.
 """
@@ -21,7 +21,7 @@ def add_product(request):
         if form.is_valid():
             form.save()
             return redirect('productsapp:product')
-    return render(request, 'productsapp/add_product.html', {'form':form})
+    return render(request, 'productsapp/add_product.html', {'form': form})
 
 def edit_product(request, product_id):
     form = ProductForm(instance = Product.objects.get(id = product_id))
@@ -30,4 +30,30 @@ def edit_product(request, product_id):
         if form.is_valid():
             form.save()
             return redirect('productsapp:product')
-    return render(request, 'productsapp/edit_product.html', {'form':form})
+    return render(request, 'productsapp/edit_product.html', {'form': form})
+
+def category(request):
+    categories = Category.objects.all()
+    return render(request, 'productsapp/category.html', {'categories': categories})
+
+def add_category(request):
+    form = CategoryForm()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('productsapp:category')
+    return render(request, 'productsapp/add_category.html', {'form': form})
+
+def product_type(request):
+    types = ProductType.objects.all()
+    return render(request, 'productsapp/product_type.html', {'types': types})
+
+def add_product_type(request):
+    form = ProductTypeForm()
+    if request.method == 'POST':
+        form = ProductTypeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('productsapp:product-type')
+    return render(request, 'productsapp/add_product_type.html', {'form': form})

@@ -2,24 +2,47 @@
 
 {% block title %}Products List{% endblock %}
 
+{% block heading %}Продукты{% endblock %}
 
+{% block button%} 
+    <a href="{% url 'productsapp:add-product' %}" class="btn btn-primary btn-sm" role="button">Добавить продукт</a>
+{%endblock%}
 
 {% block page %}
-    <h1>Hello Python</h1>
-    <a href="{% url 'productsapp:add-product' %}" class="btn btn-red">Add Product</a>
+
+<div class="row">
+  <div class="col-lg-3">
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
 
     {% for product in products%}
-        <div>
-            <h2>
-                <a href="{% url 'productsapp:edit-product' product.id %}">{{ product.name }}</a>
 
-            </h2>
+    <div class="row">
+            <div class="col-md-4">
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <img class="img-responsive"  src="{{ product.image.url }} " alt="" width="250" height="250">
+                {% else %}
+                    <img class="img-responsive"  src="/static/productsapp/img/default_image.jpg" alt="" width="250" height="250">
                 {% endif %}
-            <div>{{product.category}}</div>
-            <div>{{product.product_type}}</div>
-            <div>{{product.description}}</div>
+
+
+            </div>
+            <div class="col-md-8">
+                <h3>{{ product.name }}</h3>
+                <h4>Категория : {{product.category}}</h4>
+                <h5>Тип продукта : {{product.product_type}}</h4>
+                <p>{{product.description}}</p>
+                <a class="btn btn-primary" href="{% url 'productsapp:edit-product' product.id %}">Edit<span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
         </div>
     {% endfor %}
 {% endblock %}

@@ -1,18 +1,27 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Category</title> 
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+{% extends 'productsapp/base.html' %}
 
-    <script src="{% static 'js/bootstrap.min.js'%}"></script>
-</head>
-<body>
-    <h1>Page category</h1>
+{% block title %}Category{% endblock %}
 
-</body>
-</html>
+{% block heading %}Категории{% endblock %}
+
+{% block page %}
+
+<table class="table table-bordered">
+  <tr>
+    <th>ID</th>
+    <th>Название категории</th>
+  </tr>
+
+    {% for category in categories%}
+
+  <tr>
+    <td>{{category.id}}</td>
+    <td>{{category.name}}</td>
+  </tr>
+
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
