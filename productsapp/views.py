@@ -1,7 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from productsapp.models import Product, Category, ProductType
 
 from productsapp.forms import ProductForm, CategoryForm, ProductTypeForm 
+
+from django.views.generic import View
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 """
@@ -58,3 +62,21 @@ def add_product_type(request):
             form.save()
             return redirect('productsapp:product-type')
     return render(request, 'productsapp/add_product_type.html', {'form': form})
+
+class ProductView(View):
+    templateName = 'productsapp/product.html'
+
+    def get(self, request):
+        products = Product.objects.all()
+        return render(request, self.templateName, {'products': products})
+
+    def post(self, request):
+        if request.is_ajax():
+            data = json.loads(request.body.decode("utf-8"))
+            query = data.get('query')
+        
+            products = Product.objects.filter(name__icontains=query)
+            
+            return render(request, 'productsapp/ajax.html', {'products': products})
+        else:
+            JsonResponse({'msg': 'This is no ajax request'}, status=400)

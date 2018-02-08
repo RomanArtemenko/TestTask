@@ -1,74 +1,3 @@
-{% extends 'productsapp/base.html' %}
-
-{% block meta_title %}Products{% endblock meta_title %}
-
-{% block heading %}Продукты{% endblock heading %}
-
-{% block button %} 
-    <a href="{% url 'productsapp:add-product' %}" class="btn btn-danger btn-sm" role="button">Добавить</a>
-{% endblock button %}
-
-{% block content %}
-
-{% csrf_token %}
-
-<div class="row">
-  <div class="col-lg-3">
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control search" placeholder="Search for..." name="inpQuery">
-      <span class="input-group-btn">
-        <button class="btn btn-default search" type="button">Go!</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-
-<br>
-
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading"></div>
-
-    <table class="table table-bordered">
-        <tr>
-            <th>Фото</th>
-            <th>Наименование</th> 
-            <th>Категория </th>
-            <th>Тип продукта </th>
-            <th>Описание </th>
-            <th>Редактирование </th>
-        </tr>
-
-
-        {% for product in products%}
-
-        <tr>
-            <td>
-                {% if product.image %}
-                    <img class="img-thumbnail"  src="{{ product.image.url }} " alt="" width="150" height="150">
-                {% else %}
-                    <img class="img-thumbnail"  src="/static/productsapp/img/default_image.jpg" alt="" width="150" height="150">
-                {% endif %}
-            </td>
-            <td>{{ product.name }}</td> 
-            <td>{{product.category}}</td>
-            <td>{{product.product_type}}</td>
-            <td>{{product.description}}</td>
-            <td><a class="btn btn-default" href="{% url 'productsapp:edit-product' product.id %}">Редактировать</a></td>
-        </tr>
-
-
-        {% endfor %}
-
-    </table>
-</div>
-
-{% endblock content %}
-
-{% block extra_js %}
-<script type="text/javascript">
 $(document).ready(function(){
     function csrfSafeMethod(method) {
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -241,8 +170,8 @@ $(document).ready(function(){
                 contentType: "application/json",
                 cache: false,
                 success: function(data){
-                    $(".table").replaceWith(data);
-                    console.log(data);
+                    alert(data.filter('table'));
+                    //console.log(data);
                 },
                 error: function(xhr){
                     console.log(xhr);
@@ -251,6 +180,3 @@ $(document).ready(function(){
         }
     });
 });
-</script> 
-
-{% endblock extra_js %}
