@@ -25,7 +25,7 @@ SECRET_KEY = '7^w=yw-%%+k^*+j_+7e3(_*t(i6r@61!c-7(3a@#6mgoptuvha'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['shrouded-stream-40883.herokuapp.com/','localhost', '127.0.0.1']
 
 
 # Application definition
@@ -121,7 +121,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/path/to/folder/with/static/files/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
