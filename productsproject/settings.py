@@ -25,7 +25,7 @@ SECRET_KEY = '7^w=yw-%%+k^*+j_+7e3(_*t(i6r@61!c-7(3a@#6mgoptuvha'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['shrouded-stream-40883.herokuapp.com/','localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['shrouded-stream-40883.herokuapp.com','localhost', '127.0.0.1']
 
 
 # Application definition
