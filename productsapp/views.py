@@ -64,11 +64,10 @@ def add_product_type(request):
     return render(request, 'productsapp/add_product_type.html', {'form': form})
 
 class ProductView(View):
-    templateName = 'productsapp/product.html'
 
     def get(self, request):
         products = Product.objects.all()
-        return render(request, self.templateName, {'products': products})
+        return render(request, 'productsapp/product.html', {'products': products})
 
     def post(self, request):
         if request.is_ajax():
